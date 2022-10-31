@@ -1,13 +1,54 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+    background-color: #1e1e1e;
+    font-family: 'Raleway', sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+   
+::-webkit-scrollbar-thumb {
+    background: rgb(131, 131, 131);
+    border-radius: 20px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #111;
+    border-radius: 20px;
+}
+
+#loader {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    overflow: visible;
+    background:#111 url('./preloader.gif') no-repeat center center;
+    object-fit: cover;
+}
+
+#helper {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background:#111 url('./assets/photo_2022-10-30_23-26-51.jpg') no-repeat center center;
+    object-fit: cover;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 78px;
+    color: #fff;
+    font-weight: 900;
 }
