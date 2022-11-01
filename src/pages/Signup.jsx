@@ -5,6 +5,7 @@ import { UserAuth } from '../context/AuthContex';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { user, signUp } = UserAuth();
   const navigate = useNavigate();
   
@@ -22,10 +23,9 @@ const Signup = () => {
       await signUp(email, password);
       navigate('/');
     } catch (err) {
-      console.log(err);
-      alert('Wrong format of email or password')
-    }
-  }
+      setError(err.message);
+    };
+  };
 
   return (
     <>
@@ -35,6 +35,7 @@ const Signup = () => {
         <div className='fixed w-full px-4 py-24 z-50'>
           <form onSubmit={ handleSubmit } className="max-w-[450px] h-[600px] mx-auto bg-black/75 text-white flex flex-col justify-center text-center items-center ">
             <h1 className='text-white text-4xl font-bold my-4'>Sign Up</h1>
+            {error ? <p className='p-3 bg-red-500 my-2'>{error.slice(22, error.length-2).toUpperCase()}</p> : null}
             <input 
               onChange={(ev) => setEmail(ev.target.value)}
               className='h-10 px-4 my-2 text-gray-300 text-lg focus:outline-none font-sans' 
