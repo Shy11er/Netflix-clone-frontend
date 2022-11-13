@@ -3,13 +3,13 @@ import data from '../movies.json';
 
 const Main = () => {
     // Math.floor(Math.random() * Object.keys(data).length)
-    const movie = data[1];
+    const movie = data[7];
 
     return (
         <div className='w-full h-[900px] text-white'>
             <div className='w-full h-full'>
                 <div className="absolute h-[900px] w-full bg-gradient-to-r from-black"></div>
-                <img className="w-full h-[900px] object-cover bg-top" src={movie?.imgUrl} alt={movie?.title}  />
+                <img className="w-full h-[900px] object-cover bg-top" src={require(`../assets/movies/${movie?.title}.png`)} alt={movie?.title}  />
                 <div className='absolute w-full top-[40%] p-4 md:p-8'>
                     <h1 className='text-5xl md:text-7xl mb-4'>{movie?.title}</h1>
                     <div>

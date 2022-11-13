@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {FaHeart, FaRegHeart} from 'react-icons/fa';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { UserAuth } from '../context/AuthContex';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
@@ -12,25 +12,30 @@ const Movie = ({item}) => {
     const movieID = doc(db, 'users', `${user?.email}`);
 
     const saveShow = async () => {
-        if (user?.email) {
-            setLike(!Like);
-            setSaved(true);
-            await updateDoc(movieID, {
-                savedShows: {
-                    title: item.title,
-                    img: item.imgUrl,
-                },
-            });
-        } else {
-            alert('Please log in to save a movie');
+        try {
+            if (user?.email) {
+                setLike(!Like);
+                setSaved(true);
+                await updateDoc(movieID, {
+                    savedShows: arrayUnion({
+                        title: item.title,
+                        img: item.imgUrl,
+                    }),
+                });
+            } else {
+                alert('Please log in to save a movie');
+            }    
+        } catch (e) {
+            console.log(e);
         }
+        
     };
 
     return (
-        <div className='w-[160xp] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2'>
-            <img src={item?.imgUrl} className='w-[280px] h-[160px] block' />
-            <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white ">
-              <p className='white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-cemter'>{item?.title}</p>
+        <div className='sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2'>
+            <img src={require(`../assets/movies/${item?.title}.png`)} className='lg:h-[160px] md:h-[130px] w-[200px] h-[120px] md:w-[240px] lg:w-[280px]' />
+            <div className="absolute whitespace-normal px-4 flex text-center top-0 justify-center left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white ">
+              <p className='whitespace-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-cemter'>{item?.title}</p>
             </div>
             <p onClick={saveShow}>
                 { Like ? (
